@@ -1,0 +1,32 @@
+    {% extends 'main/base.html' %}
+    {% load static %}
+    {% block main %}
+    <div id="templatemo_right_column">
+    
+
+        
+        <div id="templatemo_main">
+            {% for post in posts %}
+            <div class="post_section">
+            
+                <span class="comment"><a href="{{ post.get_absolute_url }}">128</a></span>
+            
+                <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+
+
+                {{ post.published }} | <strong>Author:</strong> {{ post.author }} | <strong>Category:</strong> <a href="#"></a>
+                
+                <img src="{{ post.image.url }}" alt="image 1" />
+                
+                <p>{{ post.content }}</p>
+              <a href="{{ post.get_absolute_url }}">Continue reading...</a>
+                
+            </div>
+            {% endfor %}
+
+		</div>
+    
+  <div class="cleaner"></div>
+  </div> 
+    <!-- end of templatemo_main -->
+ {% endblock %}

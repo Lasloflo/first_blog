@@ -9,7 +9,7 @@
             {% for post in posts %}
             <div class="post_section">
             
-                <span class="comment"><a href="{{ post.get_absolute_url }}">128</a></span>
+                <span class="comment"><a href="{{ post.get_absolute_url }}">{{ post.comment_set.count }}</a></span>
             
                 <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
 

@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.views.generic import ListView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post, Comment
 from .forms import CommentForm
 # Create your views here.
@@ -26,16 +28,17 @@ def show_post(request, post_id):
     comments = Comment.objects.filter(post_id=post_id, is_active=True)
     all_comments_post = len(comments)
     initial = {'post': post.pk}
-    form = CommentForm(initial=initial)
+    form_class = CommentForm
+    form = form_class(initial=initial)
     if request.method == 'POST':
         c_form = CommentForm(request.POST)
+
         if c_form.is_valid():
-            print(c_form.cleaned_data)
             c_form.save()
+            return redirect(post)  # использовали редирект и 'цель'- объект модели post - (необходим get_absolute_url(self))
         else:
             form = c_form
-    else:
-        form = CommentForm()
+
     data = {
         'post': post,
         'menu': menu,

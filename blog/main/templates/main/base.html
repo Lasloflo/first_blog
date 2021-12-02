@@ -32,6 +32,16 @@
         {% for m, p in menu.items %}
             <li><a href="{% url p %}"> {{ m }}</a></li>
         {% endfor %}
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'home' %}">{{ user.username }}</a></li>
+            <li><a href="{% url 'home' %}">Add Article</a></li>
+
+            <li><a href="{% url 'logout' %}">Выйти</a></li>
+
+            {% else %}
+            <li><a href="{% url 'register' %}">Регистрация</a></li>
+            <li><a href="{% url 'login' %}">Войти</a></li>
+            {% endif %}
         </ul>
 
     </div> <!-- end of templatemo_menu -->
